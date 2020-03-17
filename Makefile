@@ -121,8 +121,8 @@ ccflags-y += -DLINUX
 
 
 ARCH ?= arm64
-KERNELVERSION_aarch64 := 	$(shell uname -r)
-KERNELDIR ?= /lib/modules/$(KERNELVERSION_aarch64)/build
+#KERNELVERSION_aarch64 := 	$(shell uname -r)
+KERNELDIR ?= $(KERNEL_SRC)
 LD += -S
 
 BINDIR = ../bin_sd8987
