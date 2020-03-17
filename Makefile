@@ -18,7 +18,7 @@
 # ARE EXPRESSLY DISCLAIMED.  The License provides additional details about
 # this warranty disclaimer.
 
-COMPATDIR=/lib/modules/$(KERNELVERSION_aarch64)/build/compat-wireless-3.2-rc1-1/include
+COMPATDIR=$(KERNEL_SRC)/include
 CC=		$(CROSS_COMPILE)gcc -I$(COMPATDIR)
 LD=		$(CROSS_COMPILE)ld
 BACKUP=		/root/backup
@@ -559,12 +559,13 @@ endif
 	$(MAKE) -C mapp/mlanevent $@
 endif
 
-install: default
+modules_install: default
 
-	cp -f mlan.$(MODEXT) $(INSTALLDIR)/mlan$(DBG).$(MODEXT)
-	cp -f ../io/sdio/$(PLATFORM)/sdio.$(MODEXT) $(INSTALLDIR)
-	cp -f sd8xxx.$(MODEXT) $(INSTALLDIR)/sd8987$(DBG).$(MODEXT)
-	echo "sd8987 Driver Installed"
+	$(make) INSTALL_MOD_STRIP=1 -C $(KERNEL_SRC) M=$(shell pwd) modules_install
+	#cp -f mlan.$(MODEXT) $(INSTALLDIR)/mlan$(DBG).$(MODEXT)
+	#cp -f ../io/sdio/$(PLATFORM)/sdio.$(MODEXT) $(INSTALLDIR)
+	#cp -f sd8xxx.$(MODEXT) $(INSTALLDIR)/sd8987$(DBG).$(MODEXT)
+	#echo "sd8987 Driver Installed"
 
 distclean:
 	-find . -name "*.o" -exec rm {} \;
