@@ -559,9 +559,9 @@ endif
 	$(MAKE) -C mapp/mlanevent $@
 endif
 
-modules_install: default
+modules_install:
 
-	$(make) INSTALL_MOD_STRIP=1 -C $(KERNEL_SRC) M=$(shell pwd) modules_install
+	$(MAKE) INSTALL_MOD_STRIP=1 -C $(KERNEL_SRC) M=$(shell pwd) modules_install
 	#cp -f mlan.$(MODEXT) $(INSTALLDIR)/mlan$(DBG).$(MODEXT)
 	#cp -f ../io/sdio/$(PLATFORM)/sdio.$(MODEXT) $(INSTALLDIR)
 	#cp -f sd8xxx.$(MODEXT) $(INSTALLDIR)/sd8987$(DBG).$(MODEXT)
